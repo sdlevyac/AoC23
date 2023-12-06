@@ -2,15 +2,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>51cccdbd-524d-466e-9543-b223567077af</ProjectGuid>
-    <ProjectHome>.</ProjectHome>
-    <StartupFile>Day5.py</StartupFile>
+    <ProjectGuid>696d652a-70e1-4158-b858-88aa90fc90ae</ProjectGuid>
+    <ProjectHome>
+    </ProjectHome>
+    <StartupFile>Day3.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Day5</Name>
-    <RootNamespace>Day5</RootNamespace>
+    <Name>Day03</Name>
+    <RootNamespace>Day3</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,8 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Day5.py" />
-    <Compile Include="gh.py" />
+    <Compile Include="Day3.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="inputBig.txt" />
