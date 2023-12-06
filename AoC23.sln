@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Day1", "Day1\Day1.pyproj", "{90F0DFFE-0B5A-45B5-9AEE-1CFEEFBFF3AA}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Day2", "Day2\Day2.pyproj", "{4E8B8624-99D9-44E7-B5D0-FDAB47B93732}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Day3", "Day3\Day3.pyproj", "{696D652A-70E1-4158-B858-88AA90FC90AE}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Day4", "Day4\Day4.pyproj", "{73D91214-B461-4D51-816F-C08CC8ACB3A3}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Day5", "Day5\Day5.pyproj", "{51CCCDBD-524D-466E-9543-B223567077AF}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Day6", "Day6\Day6.pyproj", "{366CC92D-E51A-4B65-A983-1177801B0086}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90F0DFFE-0B5A-45B5-9AEE-1CFEEFBFF3AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F0DFFE-0B5A-45B5-9AEE-1CFEEFBFF3AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8B8624-99D9-44E7-B5D0-FDAB47B93732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8B8624-99D9-44E7-B5D0-FDAB47B93732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{696D652A-70E1-4158-B858-88AA90FC90AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{696D652A-70E1-4158-B858-88AA90FC90AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D91214-B461-4D51-816F-C08CC8ACB3A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D91214-B461-4D51-816F-C08CC8ACB3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51CCCDBD-524D-466E-9543-B223567077AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51CCCDBD-524D-466E-9543-B223567077AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{366CC92D-E51A-4B65-A983-1177801B0086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{366CC92D-E51A-4B65-A983-1177801B0086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {480E6314-CDB7-4B37-A4DE-B474231DC875}
+	EndGlobalSection
+EndGlobal
