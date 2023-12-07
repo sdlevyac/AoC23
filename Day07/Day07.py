@@ -1,5 +1,5 @@
 filename = "inputSmall.txt"
-#filename = "inputBig.txt"
+filename = "inputBig.txt"
 
 cards = ["2","3","4","5","6","7","8","9","T","J","Q","K","A"]
 
@@ -85,38 +85,38 @@ def score(hand):
 handScores = {}
 
 for i, hand in enumerate(hands):
-    #handScores[i] = jScore(hand)
-    handScores[i] = score(hand)
+    handScores[i] = jScore(hand)
+    #handScores[i] = score(hand)
 
 print(handScores)
 
-#indices = list(range(len(hands)))
-#indices = [i for _,i in sorted(zip(handScores.values(), indices))][::-1]
+indices = list(range(len(hands)))
+indices = [i for _,i in sorted(zip(handScores.values(), indices))][::-1]
 
-#scoreGroups = {}
+scoreGroups = {}
 
-#for score in range(8):
-#    scoreGroups[score] = [index for index in indices if handScores[index] == score]
+for score in range(8):
+    scoreGroups[score] = [index for index in indices if handScores[index] == score]
 
-#allbids = []
+allbids = []
 
-#for score in scoreGroups:
-#    scoreGroup = scoreGroups[score]
-#    theseHands = [hands[index] for index in scoreGroup]
-#    theseHandRanks = [handRanks[index] for index in scoreGroup]
-#    theseIndices = [index for index in scoreGroup]
-#    theseBids = [bids[index] for index in scoreGroup]
+for score in scoreGroups:
+    scoreGroup = scoreGroups[score]
+    theseHands = [hands[index] for index in scoreGroup]
+    theseHandRanks = [handRanks[index] for index in scoreGroup]
+    theseIndices = [index for index in scoreGroup]
+    theseBids = [bids[index] for index in scoreGroup]
     
 
 
-#    theseHands = [i for _,i in sorted(zip(theseHandRanks, theseHands))][::-1]
-#    theseIndices = [i for _,i in sorted(zip(theseHandRanks, theseIndices))][::-1]
-#    theseBids = [i for _,i in sorted(zip(theseHandRanks, theseBids))][::-1]
+    theseHands = [i for _,i in sorted(zip(theseHandRanks, theseHands))][::-1]
+    theseIndices = [i for _,i in sorted(zip(theseHandRanks, theseIndices))][::-1]
+    theseBids = [i for _,i in sorted(zip(theseHandRanks, theseBids))][::-1]
 
 
 
-#    allbids.extend(theseBids[::-1])
+    allbids.extend(theseBids[::-1])
 
-#print(allbids)
-#vals = [bid * (i + 1) for i,bid in enumerate(allbids)]
-#print(sum(vals))
+print(allbids)
+vals = [bid * (i + 1) for i,bid in enumerate(allbids)]
+print(sum(vals))
