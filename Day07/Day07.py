@@ -1,12 +1,24 @@
 filename = "inputSmall.txt"
-filename = "inputBig.txt"
+#filename = "inputBig.txt"
+
+cards = ["2","3","4","5","6","7","8","9","T","J","Q","K","A"]
 
 cardValues = {str(i):i for i in range(2,10)}
 cardValues["T"] = 10
-cardValues["J"] = 11
-cardValues["Q"] = 12
-cardValues["K"] = 13
-cardValues["A"] = 14
+cardValues["J"] = 1
+cardValues["Q"] = 11
+cardValues["K"] = 12
+cardValues["A"] = 13
+
+def permute(hand, permutations = []):
+    if "j" in hand:
+        index = hand.index("j")
+        for card in cards:
+            handCopy = [c for c in hand]
+            handCopy[index] = card
+            permutations.extend(permute(handCopy, [handCopy]))
+            #permutations.extend()
+    return permutations
 
 def rank(hand):
     fullRank = [cardValues[c] for c in hand]
@@ -16,6 +28,23 @@ data = open(filename).read().split("\n")
 hands = [list(line.split(" ")[0]) for line in data]
 bids = [int(line.split(" ")[1]) for line in data]
 handRanks = [int("".join([f'{r:02d}' for r in rank(hand)])) for hand in hands]
+
+def jScore(hand):
+    permutations = []
+    print(hand)
+    if "J" in hand:
+        hand = [card if card != "J" else "j" for card in hand]
+        permutations = permute(hand)
+        thisHandScores = [score(permutation) for permutation in permutations]
+        #permutations = [i for _,i in sorted(zip(thisHandScores, permutations))]
+        #thisHandScores = sorted(thisHandScores)
+        for i in range(len(permutations)):
+            print("\t",permutations[i],thisHandScores[i])
+        #input()
+        permutations.clear()
+        return max(thisHandScores)
+    else:
+        return score(hand)
 
 def score(hand):
     dictHand = {}
@@ -56,35 +85,38 @@ def score(hand):
 handScores = {}
 
 for i, hand in enumerate(hands):
+    #handScores[i] = jScore(hand)
     handScores[i] = score(hand)
 
-indices = list(range(len(hands)))
-indices = [i for _,i in sorted(zip(handScores.values(), indices))][::-1]
+print(handScores)
 
-scoreGroups = {}
+#indices = list(range(len(hands)))
+#indices = [i for _,i in sorted(zip(handScores.values(), indices))][::-1]
 
-for score in range(8):
-    scoreGroups[score] = [index for index in indices if handScores[index] == score]
+#scoreGroups = {}
 
-allbids = []
+#for score in range(8):
+#    scoreGroups[score] = [index for index in indices if handScores[index] == score]
 
-for score in scoreGroups:
-    scoreGroup = scoreGroups[score]
-    theseHands = [hands[index] for index in scoreGroup]
-    theseHandRanks = [handRanks[index] for index in scoreGroup]
-    theseIndices = [index for index in scoreGroup]
-    theseBids = [bids[index] for index in scoreGroup]
+#allbids = []
+
+#for score in scoreGroups:
+#    scoreGroup = scoreGroups[score]
+#    theseHands = [hands[index] for index in scoreGroup]
+#    theseHandRanks = [handRanks[index] for index in scoreGroup]
+#    theseIndices = [index for index in scoreGroup]
+#    theseBids = [bids[index] for index in scoreGroup]
     
 
 
-    theseHands = [i for _,i in sorted(zip(theseHandRanks, theseHands))][::-1]
-    theseIndices = [i for _,i in sorted(zip(theseHandRanks, theseIndices))][::-1]
-    theseBids = [i for _,i in sorted(zip(theseHandRanks, theseBids))][::-1]
+#    theseHands = [i for _,i in sorted(zip(theseHandRanks, theseHands))][::-1]
+#    theseIndices = [i for _,i in sorted(zip(theseHandRanks, theseIndices))][::-1]
+#    theseBids = [i for _,i in sorted(zip(theseHandRanks, theseBids))][::-1]
 
 
 
-    allbids.extend(theseBids[::-1])
+#    allbids.extend(theseBids[::-1])
 
-print(allbids)
-vals = [bid * (i + 1) for i,bid in enumerate(allbids)]
-print(sum(vals))
+#print(allbids)
+#vals = [bid * (i + 1) for i,bid in enumerate(allbids)]
+#print(sum(vals))

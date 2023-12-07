@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Day07.py" />
+    <Compile Include="permutation test.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="inputBig.txt" />
