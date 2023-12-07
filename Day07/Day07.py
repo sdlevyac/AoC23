@@ -48,5 +48,11 @@ for i, hand in enumerate(hands):
 
 indices = list(range(len(hands)))
 indices = [i for _,i in sorted(zip(handScores.values(), indices))][::-1]
-for i in indices:
-    print(i, hands[i], bids[i], handScores[i])
+
+scoreGroups = {}
+
+for score in range(8):
+    scoreGroups[score] = [index for index in indices if handScores[index] == score]
+
+for score in scoreGroups:
+    print(score,scoreGroups[score])
