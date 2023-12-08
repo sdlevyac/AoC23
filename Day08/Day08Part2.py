@@ -18,19 +18,16 @@ data = data[2:]
 children = {line[0][:-1] : line[1][2:-1].split(", ") for line in data}
 allNodes = [line[0][:-1] for line in data]
 
-current = "AAA"
-currents = [node for node in allNodes if node[-1] == "A"]
-startIndices = [i for i in range(len(allNodes)) if allNodes[i][-1] == "A"]
-startPoints = [allNodes[i] for i in startIndices]
+startPoints = [allNodes[i] for i in range(len(allNodes)) if allNodes[i][-1] == "A"]
 
-allLoops = []
+periods = []
 
 for sp in startPoints:
     count = 0
     fullCount = 0
     current = sp
-    loops = []
-    while len(loops) != 1:  
+    period = 0
+    while period == 0:  
         currentChildren = children[current]
         nextInst = instructions[count]
         count = (count + 1) % len(instructions)
@@ -41,16 +38,12 @@ for sp in startPoints:
         current = nextNode
         fullCount += 1
         if current[-1] == "Z":
-            loops.append(fullCount)
-    allLoops.append(loops)
+            period = fullCount
+    periods.append(period)
 
-nums = [loop[0] for loop in allLoops]
+while len(periods) != 1:
+    newperiods = [lcm(periods[0], periods[1])]
+    newperiods.extend(periods[2:])
+    periods = [n for n in newperiods]
 
-answer = lcm(nums[0], lcm(nums[1], lcm(nums[2], lcm(nums[3], lcm(nums[4], nums[5])))))
-
-while len(nums) != 1:
-    newNums = [lcm(nums[0], nums[1])]
-    newNums.extend(nums[2:])
-    nums = [n for n in newNums]
-
-print(answer)
+print(periods[0])
