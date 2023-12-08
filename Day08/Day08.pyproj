@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>830edbc4-5426-4c27-a4fe-0eced49f7423</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Day08Part2.py</StartupFile>
+    <StartupFile>Day08Part2reverse.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
