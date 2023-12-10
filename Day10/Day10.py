@@ -1,10 +1,15 @@
-import os
+﻿import os
 
 filename = "inputSmall1.txt"
 filename = "inputBig.txt"
 
 data = open(filename).read().split("\n")
 data = [list(line) for line in data]
+
+print("part 01...")
+
+lakes = []
+inLake = []
 
 def draw(grid):
     for row in grid:
@@ -13,18 +18,14 @@ def draw(grid):
         print()
     print("~" * len(data))
     print()
-
-for line in data:
-    for col in line:
-        print(col, end="")
-    print()
     
-def getNeighbours(x, y):
+def getNeighboursLake(x, y):
     neighbours = []
-    for d in [[1,0], [-1,0], [0,1], [0,-1]]:
-        this = data[x][y]         
-        if 0 <= x + d[0] < len(data) and 0 <= y + d[1] < len(data):
-            neighbours.append([x + d[0], y + d[1]])
+    for d in [[1,0],[-1,0],[0,1],[0,-1], [1,1], [1,-1], [-1,1], [-1,-1]]:
+        dx = d[0]
+        dy = d[1]
+        if (dx != 0 or dy != 0) and 0 <= x + dx < len(render) and 0 <= y + dy < len(render):
+            neighbours.append([x + dx, y + dy])
     return neighbours
 
 validNeighbours = {"F" : [[0, 1], [1, 0]],
@@ -62,7 +63,7 @@ visited = []
 
 fixStart(start)
 
-render[start[0]][start[1]] = "#"
+
 
 while len(toVisit) != 0:
     current = toVisit.pop(0)
@@ -78,5 +79,50 @@ while len(toVisit) != 0:
     # os.system('cls')
     # draw(render)
 
+swaps = {"-":"─",
+         "|":"│",
+         "F":"┌",
+         "J":"┘",
+         "L":"└",
+         "7":"┐"}
+
+render = [[swaps[cell] if cell != " " else "." for cell in line] for line in render]
+#render[start[0]][start[1]] = "#"
 draw(render)
+input()
+
 print(max([max(line) for line in distances]))
+print("part 02...")
+
+def explore(x, y):
+    thisLake = [[x, y]]
+    toExplore = [[x, y]]
+    explored = []
+    while len(toExplore) != 0:
+        current = toExplore.pop(0)
+        explored.append(current)
+        neighbours = getNeighboursLake(current[0], current[1])
+        toExplore.extend([n for n in neighbours if render[n[0]][n[1]] == " " and n not in toExplore and n not in explored])
+    lakes.append(len(explored))
+    inLake.extend(explored)
+    for coord in explored:
+        render[coord[0]][coord[1]] = symbol[0]
+    symbol[0] = "#"    
+
+symbol = ["A"]
+explore(0,0)
+
+for i in range(len(render)):
+    for j in range(len(render)):
+        if render[i][j] == " " and [i,j] not in inLake:
+            print(f"exploring lake at {[i,j]}...")
+            explore(i, j)
+ 
+            
+draw(render)
+lakes = sorted(lakes)
+lakes = lakes[:-1]
+print(sum(lakes))
+ 
+answer = sum([line.count("#") for line in render])
+print(answer)
