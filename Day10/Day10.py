@@ -1,7 +1,7 @@
 ﻿import os
 
 filename = "inputSmall1.txt"
-#filename = "inputBig.txt"
+filename = "inputBig.txt"
 
 data = open(filename).read().split("\n")
 data = [list(line) for line in data]
@@ -36,7 +36,7 @@ validNeighbours = {"F" : [[0, 1], [1, 0]],
                    "7" : [[0, -1], [1, 0]]}
 
 def fixStart(start):
-    data[start[0]][start[1]] = "F"
+    data[start[0]][start[1]] = "L"
 
 
 def getNeighboursPipes(x, y):
@@ -81,7 +81,7 @@ while len(toVisit) != 0:
             
     toVisit.extend(n for n in neighbours if n not in toVisit and n not in visited)
     # os.system('cls')
-    draw(render)
+    #draw(render)
 
 swaps = {"-":"─",
          "|":"│",
