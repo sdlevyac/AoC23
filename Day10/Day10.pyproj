@@ -22,8 +22,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Day10.py" />
+    <Compile Include="ext.py" />
+    <Compile Include="ext2.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="inputBig - Copy.txt" />
     <Content Include="inputBig.txt" />
     <Content Include="inputSmall1.txt" />
   </ItemGroup>
