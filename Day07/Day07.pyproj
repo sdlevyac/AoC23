@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Day07-NDC03146.py" />
     <Compile Include="Day07.py" />
     <Compile Include="permutation test.py" />
   </ItemGroup>
