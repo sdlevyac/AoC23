@@ -104,6 +104,7 @@ def explore(x, y, grid):
     toExplore = [[x, y]]
     explored = []
     while len(toExplore) != 0:
+        #print(len(toExplore),len(explored),end="\t")
         current = toExplore.pop(0)
         explored.append(current)
         neighbours = getNeighboursLake(current[0], current[1], grid)
@@ -111,7 +112,8 @@ def explore(x, y, grid):
     lakes.append(len(explored))
     inLake.extend(explored)
     for coord in explored:
-        grid[coord[0]][coord[1]] = symbol[0]  
+        grid[coord[0]][coord[1]] = symbol[0]
+    print()
 
 symbol = ["~"]
 # explore(0,0, render)
@@ -230,3 +232,14 @@ draw(bigRender)
 input()
 explore(eStart[0],eStart[1],bigRender)
 draw(bigRender)
+
+smallRender = [['.' for y in range(int(len(bigRender[0])/3))] for x in range(int(len(bigRender)/3))]
+for x in range(len(smallRender)):
+    for y in range(len(smallRender[x])):
+        midX = (x * 3) + 1
+        midY = (y * 3) + 1
+        smallRender[x][y] = bigRender[midX][midY]
+
+
+draw(smallRender)
+print(sum([line.count(".") for line in smallRender]))
