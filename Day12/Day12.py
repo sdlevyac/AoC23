@@ -33,7 +33,12 @@ def expandData(smallData):
     expandedData = [[((line[0] + "?")*5)[:-1], ((line[1] + ",")*5)[:-1]] for line in smallData]
     return expandedData
 
-data = expandData(data)
+#data = expandData(data)
+#working out all permutations and then deciding which ones are valid is far too time intensive
+#instead we need to work out all the valid ways of representing the pattern and then apply these
+#valid patterns to the initial data
+#as it stands, this method is ~ok~ for part 1 but even the small data input takes an unreasonable length of time
+#for part 2 - this has at least been good for practicing generating permutations based on certain rules
 
 answer = 0
 for i, line in enumerate(data):
