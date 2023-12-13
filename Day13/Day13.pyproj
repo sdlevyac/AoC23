@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>6f50a6c8-6005-4899-8bde-cdaff4d5a57e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Day13p2.py</StartupFile>
+    <StartupFile>Day13.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Day13.py" />
-    <Compile Include="Day13p2.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="inputBig.txt" />
