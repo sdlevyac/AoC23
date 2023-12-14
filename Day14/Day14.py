@@ -29,7 +29,7 @@ def copy2dList(source):
 data = open(filename).read().split("\n")
 data = [list(line) for line in data]
 
-draw(data)
+#draw(data)
 
 def totalLoad(grid):
     ans = 0
@@ -82,7 +82,7 @@ def tiltNorth(grid):
                     copyGrid[i-1][j] = "O"
                     changes += 1
         #draw(copyGrid)
-        print(f"{changes} changes")
+        #print(f"{changes} changes")
         grid = copy2dList(copyGrid)
         #input()
         if changes == 0:
@@ -93,8 +93,8 @@ initialData = copy2dList(data)
 
 #part1
 data = tiltNorth(data)
-draw(data)
 answer = totalLoad(data)
+print(answer)
 
 states = {}
 
@@ -104,37 +104,35 @@ cycleLength = -1
 cycleStates = []
 limit = 1000000000
 for i in range(limit):
-    print(f"cycle {i} / 1000000000")
+    #print(f"cycle {i} / 1000000000")
     initialState = copy2dList(data)
     initialStateCompressed = compress(initialState)
     if initialStateCompressed in states:
-        if cycleLength == -1:
-            cycleStart = initialStateCompressed
-            cycleLength = 0
+        if len(cycleStates) == 0:
             cycleStates.append(initialStateCompressed)
         else:
-            if initialStateCompressed == cycleStart:
-                print(f"cycle of length {cycleLength}")
-                remaining = limit - i
-                remainingCycles = remaining/cycleLength
-                remainderCycles = remaining%cycleLength
-                print(remainingCycles, remainderCycles)
-                for cycleState in cycleStates:
-                    print(cycleState)
-                    print(totalLoad(decompress(cycleState)))
-                    input()
-                input()
+            if initialStateCompressed in cycleStates:
+                #print(f"cycle of length {len(cycleStates)}")
+                loads = [totalLoad(decompress(cycleState)) for cycleState in cycleStates]
+                #print(loads)
+                #print(f"{i} cycles")
+                #print(f"loop of {len(cycleStates)} states")
+                #print(f"{limit - i} cycles remaining")
+                #print(f"{(limit-i)%len(cycleStates)}")
+                print(loads[(limit-i)%len(cycleStates)])
+                break            
             else:
                 cycleLength += 1
                 cycleStates.append(initialStateCompressed)
-        print("state has already been computed")
+        #print("state has already been computed")
         dataCompressed = states[initialStateCompressed]
         data = decompress(dataCompressed)
         #input()
         continue
-    print(initialStateCompressed)
+    #print(initialStateCompressed)
+    #print(f"cycle {i} / 1000000000")
     for cycle in [[-1,0],[0,-1],[1,0],[0,1]]:               
         data, changes = tiltGeneral(data,cycle[0],cycle[1])
     dataCompressed = compress(data)
     states[initialStateCompressed] = dataCompressed
-    print(dataCompressed)
+    #print(dataCompressed)
