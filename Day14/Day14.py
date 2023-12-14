@@ -1,5 +1,18 @@
 filename = "inputSmall.txt"
-filename = "inputBig.txt"
+#filename = "inputBig.txt"
+
+def compress(grid):
+    return("\n".join(["".join(line) for line in grid]))
+
+def decompress(dataString):
+    return [list(line) for line in dataString.split("\n")]
+
+def compare(source, alt):
+    for i in range(len(source)):
+        for j in range(len(source[i])):
+            if source[i][j] != alt[i][j]:
+                return False
+    return True
 
 def draw(grid):
     output = ""
@@ -26,6 +39,36 @@ def totalLoad(grid):
                 ans += len(grid) - i
     return ans
 
+def tiltGeneral(grid,dx,dy):
+    totalChanges = 0
+    tilt = True
+    while tilt:
+        changes = 0
+        copyGrid = copy2dList(grid)
+        if dx == -1:
+            iRange = range(1,len(grid))
+        elif dx == 1:
+            iRange = range(0,len(grid)-1)
+        else:
+            iRange = range(0,len(grid))
+        if dy == -1:
+            jRange = range(1,len(grid[0]))
+        elif dy == 1:
+            jRange = range(0,len(grid[0])-1)
+        else:
+            jRange = range(0,len(grid[0]))
+        for i in iRange:
+            for j in jRange:
+                if grid[i][j] == "O" and grid[i+dx][j+dy] == ".":
+                    copyGrid[i][j] = "."
+                    copyGrid[i+dx][j+dy] = "O"
+                    changes += 1
+        grid = copy2dList(copyGrid)
+        totalChanges += changes
+        if changes == 0:
+            tilt = False
+    return grid, totalChanges
+
 def tiltNorth(grid):
 
     tilt = True
@@ -46,7 +89,52 @@ def tiltNorth(grid):
             tilt = False
     return grid
 
+initialData = copy2dList(data)
+
+#part1
 data = tiltNorth(data)
 draw(data)
 answer = totalLoad(data)
-print(answer)
+
+states = {}
+
+#part2
+data = copy2dList(initialData)
+cycleLength = -1
+cycleStates = []
+limit = 1000000000
+for i in range(limit):
+    print(f"cycle {i} / 1000000000")
+    initialState = copy2dList(data)
+    initialStateCompressed = compress(initialState)
+    if initialStateCompressed in states:
+        if cycleLength == -1:
+            cycleStart = initialStateCompressed
+            cycleLength = 0
+            cycleStates.append(initialStateCompressed)
+        else:
+            if initialStateCompressed == cycleStart:
+                print(f"cycle of length {cycleLength}")
+                remaining = limit - i
+                remainingCycles = remaining/cycleLength
+                remainderCycles = remaining%cycleLength
+                print(remainingCycles, remainderCycles)
+                for cycleState in cycleStates:
+                    print(cycleState)
+                    print(totalLoad(decompress(cycleState)))
+                    input()
+                input()
+            else:
+                cycleLength += 1
+                cycleStates.append(initialStateCompressed)
+        print("state has already been computed")
+        dataCompressed = states[initialStateCompressed]
+        data = decompress(dataCompressed)
+        #input()
+        continue
+    print(initialStateCompressed)
+    for cycle in [[-1,0],[0,-1],[1,0],[0,1]]:               
+        data, changes = tiltGeneral(data,cycle[0],cycle[1])
+    dataCompressed = compress(data)
+    states[initialStateCompressed] = dataCompressed
+    print(dataCompressed)
