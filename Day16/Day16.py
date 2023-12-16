@@ -4,83 +4,76 @@ filename = "inputBig.txt"
 data = open(filename).read().split("\n")
 data = [list(line) for line in data]
 
-def draw(grid):
+def showEnergy():
     output = ""
-    for row in grid:
+    for row in energy:
         for col in row:
-            output += col
+            if col > 0:
+                output += "#"
+            else:
+                output += "."
         output += "\n"
     print(output)
+def draw(grid,separator=""):
+    for i in range(len(data)):
+        print(separator.join(list(map(str,grid[i]))))
+    print("~"*len(data[0]))
 
-energy = [["." for j in i] for i in data]
+energy = [[data[i][j] for j in range(len(data[i]))] for i in range(len(data))]
+energy = [[0 for j in i] for i in data]
+lasers = [["." for j in i] for i in data]
 
-trails = {"r":">",
-          "l":"<",
-          "u":"^",
-          "d":"v"}
+lasers[0][0]=">"
 
-directions = {"r":[0,1],
-              "l":[0,-1],
-              "u":[-1,0],
-              "d":[1,0]}
+nextSteps = {">":[0,1],
+             "<":[0,-1],
+             "^":[-1,0],
+             "v":[1,0]}
 
-beams = [[0,0,"r"]]
-
-active = True
-
-draw(data)
-draw(energy)
-
-
-
-while active:
-    changes = 0
-    #print(len(beams),"beams")
-    for beam in beams:  
-        x = beam[0]
-        y = beam[1]
-        data[x][y] = trails[beam[2]] if data[x][y] == "." else data[x][y]
-        if energy[x][y] == ".":
-            energy[x][y] = "#"
-            changes += 1
-        direction = directions[beam[2]]
-        beam[0] += direction[0]
-        beam[1] += direction[1]
-        try:
-            newCell = data[beam[0]][beam[1]]
-        except :
-            continue      
-        if newCell == "\\":
-            if beam[2] == "r":
-                beam[2] = "d"
-            elif beam[2] == "l":
-                beam[2] = "u"
-            elif beam[2] == "u":
-                beam[2] = "l"
-            elif beam[2] == "d":
-                beam[2] = "r"
-        elif newCell == "/":
-            if beam[2] == "r":
-                beam[2] = "u"
-            elif beam[2] == "l":
-                beam[2] = "d"
-            elif beam[2] == "u":
-                beam[2] = "r"
-            elif beam[2] == "d":
-                beam[2] = "l"
-        elif newCell == "|":
-            beam[2] = "u"
-            beams.append([beam[0],beam[1],"d"])
-        elif newCell == "-":
-            beam[2] = "l"
-            beams.append([beam[0],beam[1],"r"])
-    beams = [beam for beam in beams if ((beam[0] >= 0 and beam[0] < len(data) and beam[1] >= 0 and beam[1] < len(data[0])))]# and data[beam[0]][beam[1]] in ["|","-",".","/","\\"] and data[beam[0]][beam[1]] not in ["<",">","^","v"])]
-    draw(data)
-    #draw(energy)
-    if changes == 0:
-        break
-    print(len(beams),"beams")
-    print(changes,"changes")
-    #input()
-    
-print(sum([line.count("#") for line in energy]))     
+transforms = {">":{"/":"^",
+                   "\\":"v",
+                   "|":"^v",
+                   "-":">"},
+              "<":{"/":"v",
+                   "\\":"^",
+                   "|":"^v",
+                   "-":"<"},
+              "^":{"/":">",
+                   "\\":"<",
+                   "|":"^",
+                   "-":"<>"},
+              "v":{"/":"<",
+                   "\\":">",
+                   "|":"v",
+                   "-":"<>"}}
+while True:
+    lasersBuffer = [line[:] for line in lasers]
+    for i in range(len(data)):
+        for j in range(len(data[i])):
+            energy[i][j] = energy[i][j] + 1 if lasers[i][j] != "." else energy[i][j]
+    print("applying tranforms...")
+    for i in range(len(data)):
+        for j in range(len(data[i])):          
+            if lasers[i][j] != "." and data[i][j] in ["/","\\","-","|"]:
+                new = ""
+                for symbol in lasers[i][j]:
+                    new += transforms[symbol][data[i][j]]
+                lasers[i][j] = new
+    print("transforms applied")
+    for i in range(len(data)):
+        for j in range(len(data[i])):
+            if lasers[i][j] != ".":
+                for symbol in lasers[i][j]:
+                    direction = nextSteps[symbol]
+                    if 0 <= i + direction[0] < len(data) and 0 <= j + direction[1] < len(data[i]):
+                        if lasersBuffer[i+direction[0]][j+direction[1]] != "." and data[i+direction[0]][j+direction[1]] not in ["-","|"]:
+                            lasersBuffer[i+direction[0]][j+direction[1]] += symbol
+                        else:
+                            lasersBuffer[i+direction[0]][j+direction[1]] = symbol
+                lasersBuffer[i][j] = "."
+    showEnergy()
+    lasers = [line[:] for line in lasersBuffer]
+    print(sum([len([cell for cell in line if cell > 0]) for line in energy]))
+    if sum([len([cell for cell in line if cell > 0]) for line in energy]) > 46:
+        print("o")
+    input()
