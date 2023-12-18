@@ -24,6 +24,7 @@
     <Compile Include="Day17.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="inputBig.txt" />
     <Content Include="inputSmall.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
