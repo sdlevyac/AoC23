@@ -71,5 +71,5 @@ while len(toVisit) != 0:
             if (dx,dy) not in toVisit:
                 toVisit.append((dx,dy))
 
-draw(grid)
+#draw(grid)
 print(sum([line.count("#") for line in grid]))
