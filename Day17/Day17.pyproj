@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>e68eae1f-82ea-4fb7-9f78-1c3a0b69c3ac</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Day17.py</StartupFile>
+    <StartupFile>Day17redo.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,6 +24,7 @@
     <Compile Include="Day17.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Day17redo.py" />
     <Content Include="inputBig.txt" />
     <Content Include="inputSmall.txt" />
   </ItemGroup>

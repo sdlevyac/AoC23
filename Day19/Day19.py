@@ -69,10 +69,7 @@ for part in parts:
                         print("\t",dest)
                         break
             if dest != "":
-                break
-        
-        #input()
+                break    
     if dest == "A":
         answer += sum([val[1] for val in part])
-    #input()
 print(answer)
