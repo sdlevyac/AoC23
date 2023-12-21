@@ -1,5 +1,5 @@
 filename = "inputSmall.txt"
-filename = "inputBig.txt"
+#filename = "inputBig.txt"
 #data = open(filename).read().split("\n")
 
 #def refresh():
@@ -86,6 +86,12 @@ filename = "inputBig.txt"
 from heapq import heappush, heappop
 
 grid = [list(map(int, line.strip())) for line in open(filename)]
+mapOut = [["" for col in row] for row in grid]
+directions = {(1,0):"V",
+			  (-1,0):"^",
+			  (0,1):">",
+			  (0,-1):"<",
+              (0,0):"#"}
 
 seen = set()
 #     (heat loss, row, column, deltaRow, deltColumn, length of run)
@@ -108,6 +114,7 @@ while pq:
         nc = c + dc
         if 0 <= nr < len(grid) and 0 <= nc < len(grid[0]):
             heappush(pq, (hl + grid[nr][nc], nr, nc, dr, dc, n + 1))
+            mapOut[nr][nc] = directions[(dr,dc)]
 
     if n >= 4 or (dr, dc) == (0, 0):
         for ndr, ndc in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
@@ -116,3 +123,7 @@ while pq:
                 nc = c + ndc
                 if 0 <= nr < len(grid) and 0 <= nc < len(grid[0]):
                     heappush(pq, (hl + grid[nr][nc], nr, nc, ndr, ndc, 1))
+                    mapOut[nr][nc] = directions[(dr,dc)]
+
+for row in mapOut:
+    print("".join(row))
